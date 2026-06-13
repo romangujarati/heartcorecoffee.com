@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="HeartCore Coffee — Specialty brewed and served from India's roots. Coming soon to Mumbai." />
+  <meta property="og:title" content="HeartCore Coffee — Brewing Soon" />
+  <meta property="og:description" content="Specialty brewed and served from India's roots." />
+  <meta property="og:url" content="https://heartcorecoffee.com" />
+  <title>HeartCore Coffee — Brewing Soon</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;600;700;900&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ── TOKENS ─────────────────────────────────────────────────────── */
+    :root {
+      --saffron:     #E8612A;
+      --saffron-dk:  #C94E1E;
+      --saffron-lt:  #F07A47;
+      --ivory:       #FDF6EC;
+      --espresso:    #2D1B0E;
+      --gold:        #F2A81D;
+      --white:       #FFFFFF;
+      --font-display: 'Playfair Display', serif;
+      --font-body:    'Raleway', sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body {
+      height: 100%;
+      background: var(--saffron);
+      color: var(--white);
+      font-family: var(--font-body);
+      overflow-x: hidden;
+    }
+
+    /* ── GRAIN TEXTURE OVERLAY ───────────────────────────────────────── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.5;
+    }
+
+    /* ── ROGAN ART BORDER — TOP & BOTTOM ────────────────────────────── */
+    .rogan-border {
+      position: fixed;
+      left: 0; right: 0;
+      height: 6px;
+      background: repeating-linear-gradient(
+        90deg,
+        var(--gold) 0px,
+        var(--gold) 12px,
+        transparent 12px,
+        transparent 18px,
+        var(--ivory) 18px,
+        var(--ivory) 24px,
+        transparent 24px,
+        transparent 30px
+      );
+      z-index: 10;
+      opacity: 0.85;
+    }
+    .rogan-border.top    { top: 0; }
+    .rogan-border.bottom { bottom: 0; }
+
+    /* ── MAIN LAYOUT ─────────────────────────────────────────────────── */
+    .page {
+      position: relative;
+      z-index: 1;
+      min-height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 80px 24px 80px;
+      text-align: center;
+      gap: 0;
+    }
+
+    /* ── LOGO ────────────────────────────────────────────────────────── */
+    .logo-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 32px;
+      animation: fadeDown 1s ease both;
+    }
+
+    .logo-stacked {
+      font-family: var(--font-body);
+      font-weight: 900;
+      font-size: clamp(52px, 10vw, 88px);
+      line-height: 0.82;
+      letter-spacing: -0.02em;
+      color: var(--white);
+      text-transform: uppercase;
+      /* Retro-block stacked letter style */
+      -webkit-text-stroke: 1.5px rgba(255,255,255,0.15);
+    }
+
+    .logo-stacked span {
+      display: block;
+    }
+
+    .logo-sub {
+      font-family: var(--font-body);
+      font-weight: 600;
+      font-size: clamp(11px, 2vw, 14px);
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.85);
+      margin-top: 8px;
+    }
+
+    /* ── STEAM ANIMATION — THE SIGNATURE ELEMENT ─────────────────────── */
+    /* Inspired by Rogan Art flame strokes — three organic rising paths */
+    .steam-wrap {
+      position: relative;
+      width: 120px;
+      height: 80px;
+      margin: 0 auto 28px;
+      animation: fadeUp 1.2s ease 0.3s both;
+    }
+
+    .steam-wrap svg {
+      width: 100%;
+      height: 100%;
+      overflow: visible;
+    }
+
+    .steam-path {
+      fill: none;
+      stroke: rgba(255,255,255,0.55);
+      stroke-width: 2.5;
+      stroke-linecap: round;
+      animation: steamRise 2.4s ease-in-out infinite;
+    }
+
+    .steam-path:nth-child(1) { animation-delay: 0s;    stroke: rgba(255,255,255,0.6); }
+    .steam-path:nth-child(2) { animation-delay: 0.8s;  stroke: rgba(255,255,255,0.4); }
+    .steam-path:nth-child(3) { animation-delay: 1.6s;  stroke: rgba(255,255,255,0.5); }
+
+    @keyframes steamRise {
+      0%   { stroke-dashoffset: 200; opacity: 0;   transform: translateY(8px); }
+      20%  { opacity: 1; }
+      80%  { opacity: 0.6; }
+      100% { stroke-dashoffset: 0;   opacity: 0;   transform: translateY(-20px); }
+    }
+
+    /* ── TAGLINE ─────────────────────────────────────────────────────── */
+    .tagline {
+      font-family: var(--font-body);
+      font-weight: 700;
+      font-size: clamp(11px, 2.2vw, 13px);
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.9);
+      margin-bottom: 52px;
+      animation: fadeUp 1s ease 0.5s both;
+    }
+
+    /* ── BREWING SOON ────────────────────────────────────────────────── */
+    .hero-text {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: clamp(52px, 12vw, 110px);
+      line-height: 0.95;
+      letter-spacing: -0.02em;
+      color: var(--white);
+      margin-bottom: 28px;
+      animation: fadeUp 1s ease 0.7s both;
+    }
+
+    /* ── HINDI LINE ──────────────────────────────────────────────────── */
+    .hindi-line {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: clamp(18px, 3.5vw, 26px);
+      color: rgba(255,255,255,0.75);
+      letter-spacing: 0.02em;
+      margin-bottom: 56px;
+      animation: fadeUp 1s ease 0.9s both;
+    }
+
+    /* ── DIVIDER ─────────────────────────────────────────────────────── */
+    .divider {
+      width: 48px;
+      height: 3px;
+      background: rgba(255,255,255,0.4);
+      border-radius: 2px;
+      margin: 0 auto 52px;
+      animation: fadeUp 1s ease 1s both;
+    }
+
+    /* ── NOTIFY FORM ─────────────────────────────────────────────────── */
+    .notify-block {
+      animation: fadeUp 1s ease 1.1s both;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+      width: 100%;
+      max-width: 440px;
+    }
+
+    .notify-label {
+      font-family: var(--font-body);
+      font-weight: 600;
+      font-size: 13px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.8);
+    }
+
+    .notify-form {
+      display: flex;
+      width: 100%;
+      gap: 0;
+      border-radius: 6px;
+      overflow: hidden;
+      border: 1.5px solid rgba(255,255,255,0.35);
+      background: rgba(255,255,255,0.08);
+      backdrop-filter: blur(4px);
+    }
+
+    .notify-form input {
+      flex: 1;
+      background: transparent;
+      border: none;
+      outline: none;
+      padding: 14px 18px;
+      font-family: var(--font-body);
+      font-size: 14px;
+      font-weight: 400;
+      color: var(--white);
+      letter-spacing: 0.02em;
+    }
+
+    .notify-form input::placeholder {
+      color: rgba(255,255,255,0.5);
+    }
+
+    .notify-form button {
+      background: var(--white);
+      color: var(--saffron);
+      border: none;
+      padding: 14px 22px;
+      font-family: var(--font-body);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.2s ease, color 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .notify-form button:hover {
+      background: var(--ivory);
+    }
+
+    .notify-success {
+      display: none;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      color: rgba(255,255,255,0.9);
+    }
+
+    /* ── SOCIAL ROW ──────────────────────────────────────────────────── */
+    .social-row {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      margin-top: 52px;
+      animation: fadeUp 1s ease 1.3s both;
+    }
+
+    .social-link {
+      font-family: var(--font-body);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.7);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .social-link:hover { color: var(--white); }
+
+    .social-dot {
+      width: 3px;
+      height: 3px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.4);
+    }
+
+    /* ── BANDHANI DOTS — DECORATIVE CORNERS ─────────────────────────── */
+    .dot-grid {
+      position: fixed;
+      opacity: 0.12;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .dot-grid.tl { top: 20px; left: 20px; }
+    .dot-grid.br { bottom: 20px; right: 20px; transform: rotate(180deg); }
+
+    .dot-grid svg circle {
+      fill: var(--white);
+    }
+
+    /* ── FOOTER LINE ─────────────────────────────────────────────────── */
+    .footer-line {
+      position: fixed;
+      bottom: 18px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.35);
+      white-space: nowrap;
+      z-index: 10;
+    }
+
+    /* ── ANIMATIONS ──────────────────────────────────────────────────── */
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── MOBILE ──────────────────────────────────────────────────────── */
+    @media (max-width: 480px) {
+      .notify-form {
+        flex-direction: column;
+        border-radius: 6px;
+      }
+      .notify-form input {
+        padding: 13px 16px;
+      }
+      .notify-form button {
+        padding: 13px 16px;
+      }
+      .hero-text {
+        font-size: clamp(44px, 14vw, 72px);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Rogan Art borders -->
+  <div class="rogan-border top"></div>
+  <div class="rogan-border bottom"></div>
+
+  <!-- Bandhani dot grids — corners -->
+  <div class="dot-grid tl">
+    <svg width="72" height="72" viewBox="0 0 72 72">
+      <circle cx="6"  cy="6"  r="2.5"/>
+      <circle cx="18" cy="6"  r="2.5"/>
+      <circle cx="30" cy="6"  r="2.5"/>
+      <circle cx="42" cy="6"  r="2.5"/>
+      <circle cx="6"  cy="18" r="2.5"/>
+      <circle cx="18" cy="18" r="2.5"/>
+      <circle cx="30" cy="18" r="2.5"/>
+      <circle cx="6"  cy="30" r="2.5"/>
+      <circle cx="18" cy="30" r="2.5"/>
+      <circle cx="6"  cy="42" r="2.5"/>
+    </svg>
+  </div>
+  <div class="dot-grid br">
+    <svg width="72" height="72" viewBox="0 0 72 72">
+      <circle cx="6"  cy="6"  r="2.5"/>
+      <circle cx="18" cy="6"  r="2.5"/>
+      <circle cx="30" cy="6"  r="2.5"/>
+      <circle cx="42" cy="6"  r="2.5"/>
+      <circle cx="6"  cy="18" r="2.5"/>
+      <circle cx="18" cy="18" r="2.5"/>
+      <circle cx="30" cy="18" r="2.5"/>
+      <circle cx="6"  cy="30" r="2.5"/>
+      <circle cx="18" cy="30" r="2.5"/>
+      <circle cx="6"  cy="42" r="2.5"/>
+    </svg>
+  </div>
+
+  <main class="page">
+
+    <!-- Logo -->
+    <div class="logo-wrap">
+      <div class="logo-stacked" aria-label="HeartCore Coffee">
+        <span>HEA</span>
+        <span>RTC</span>
+        <span>ORE</span>
+      </div>
+      <div class="logo-sub">Coffee</div>
+    </div>
+
+    <!-- Steam animation — Rogan Art flame paths -->
+    <div class="steam-wrap" aria-hidden="true">
+      <svg viewBox="0 0 120 80" preserveAspectRatio="xMidYMid meet">
+        <path class="steam-path"
+          d="M30 75 C28 62, 36 55, 32 42 C28 30, 36 22, 30 10"
+          stroke-dasharray="80" stroke-dashoffset="80"/>
+        <path class="steam-path"
+          d="M60 75 C62 60, 52 52, 58 38 C64 24, 54 18, 60 5"
+          stroke-dasharray="85" stroke-dashoffset="85"/>
+        <path class="steam-path"
+          d="M90 75 C88 63, 96 56, 90 43 C84 30, 92 22, 88 8"
+          stroke-dasharray="80" stroke-dashoffset="80"/>
+      </svg>
+    </div>
+
+    <!-- Tagline -->
+    <p class="tagline">Specialty brewed and served from India's roots.</p>
+
+    <!-- Hero -->
+    <h1 class="hero-text">Brewing<br/>Soon.</h1>
+
+    <!-- Hindi -->
+    <p class="hindi-line">जल्द ही आ रहे हैं</p>
+
+    <div class="divider"></div>
+
+    <!-- Notify -->
+    <div class="notify-block">
+      <p class="notify-label">Be the first to know</p>
+      <form class="notify-form" id="notifyForm" onsubmit="handleSubmit(event)">
+        <input
+          type="email"
+          placeholder="your@email.com"
+          aria-label="Email address"
+          required
+        />
+        <button type="submit">Notify Me</button>
+      </form>
+      <p class="notify-success" id="notifySuccess">
+        ✦ &nbsp;You're on the list. See you soon.
+      </p>
+    </div>
+
+    <!-- Social -->
+    <nav class="social-row" aria-label="Social links">
+      <a class="social-link" href="https://instagram.com/heartcorecoffee" target="_blank" rel="noopener">Instagram</a>
+      <div class="social-dot" aria-hidden="true"></div>
+      <a class="social-link" href="mailto:hello@heartcore.coffee">hello@heartcore.coffee</a>
+      <div class="social-dot" aria-hidden="true"></div>
+      <a class="social-link" href="https://heartcorecoffee.com">Mumbai, India</a>
+    </nav>
+
+  </main>
+
+  <p class="footer-line">© 2025 HeartCore Coffee &nbsp;·&nbsp; हार्टकोर कॉफ़ी</p>
+
+  <script>
+    function handleSubmit(e) {
+      e.preventDefault();
+      const form = document.getElementById('notifyForm');
+      const success = document.getElementById('notifySuccess');
+      form.style.display = 'none';
+      success.style.display = 'block';
+    }
+  </script>
+</body>
+</html>
